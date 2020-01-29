@@ -6,9 +6,12 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter)
 
+import router from './router'
+
 Vue.config.productionTip = false
 
 new Vue({
   vuetify,
+  router,
   render: h => h(App)
 }).$mount('#app')
