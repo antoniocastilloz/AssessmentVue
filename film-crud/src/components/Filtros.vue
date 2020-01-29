@@ -1,17 +1,12 @@
 <template>
   <div>
-    <Item/>
   </div>
 </template>
 
 <script>
-import Item from './Item'
 
 export default {
-  name: "Listas",
+  name: "Filtros",
   data: () => ({}),
-  components:{
-    Item
-  }
 };
 </script>

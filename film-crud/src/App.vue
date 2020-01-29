@@ -7,8 +7,8 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
-      <v-btn to="/" text>Home</v-btn>
-      <v-btn to="/app" text class="ml-4">App</v-btn>
+      <v-btn to="/" text><v-icon class="mr-3">home</v-icon>Home</v-btn>
+      <v-btn to="/app" text class="ml-4"><v-icon class="mr-3">exit_to_app</v-icon>App</v-btn>
     </v-app-bar>
     <v-content>
       <router-view></router-view>

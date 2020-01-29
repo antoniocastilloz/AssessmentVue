@@ -1,6 +1,5 @@
 <template>
   <div class="grey darken-4 white--text text-center heightFull">
-    <div>Aplicacao</div>
     <Forms />
     <Listas />
   </div>

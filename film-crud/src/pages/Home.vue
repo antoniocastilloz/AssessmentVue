@@ -4,7 +4,8 @@
       <v-col cols="4" class="d-flex align-center">
         <div>
           <h1 class="display-2 font-italic font-weight-bold">
-            ⚡ Game<strong>Catalog</strong>
+            ⚡Game
+            <strong>Catalog</strong>
           </h1>
           <br />
           <p
@@ -52,7 +53,7 @@ export default {
       "https://media.giphy.com/media/WdqlhBrNj2W3u/source.gif",
       "https://media.giphy.com/media/247U9uYBNscCc/source.gif",
       "https://media.giphy.com/media/uQKc2CfocyFJ6/source.gif",
-      "https://media.giphy.com/media/9MIzdMaj7PkE4Tn2TD/source.gif",
+      "https://media.giphy.com/media/9MIzdMaj7PkE4Tn2TD/source.gif"
     ],
     actualGif: "https://media.giphy.com/media/txcIHRNl2vcDm/source.gif",
     visualizeGif: true
