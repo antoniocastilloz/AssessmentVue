@@ -1,14 +1,35 @@
 <template>
   <div class="heightFull grey darken-4 d-flex align-center">
-    <v-row class=" white--text justify-center text-center">
-      <v-col cols="4">
-        teste
-        <v-btn class="bgGradient white--text" raised block>
-          Ir para o aplicativo
-          <v-icon dark right>double_arrow</v-icon>
-        </v-btn>
+    <v-row class="white--text justify-center">
+      <v-col cols="4" class="d-flex align-center">
+        <div>
+          <h1 class="display-2 font-italic font-weight-bold">
+            ⚡ Game<strong>Catalog</strong>
+          </h1>
+          <br />
+          <p
+            class="headline"
+          >O GameCatalog é o melhor sistema para catalogar os seus jogos que você já completou ou está jogando.</p>
+          <br />
+          <v-btn elevation="10" class="bgGradient white--text" to="/app" raised block large>
+            Ir para o aplicativo
+            <v-icon dark right>double_arrow</v-icon>
+          </v-btn>
+        </div>
       </v-col>
-      <v-col cols="4"></v-col>
+      <v-col cols="4">
+        <v-row>
+          <v-col elevation="23" cols="10" offset="2">
+            <img
+              v-if="visualizeGif"
+              :src="actualGif"
+              alt="jogo"
+              style="width:100%; border-radius:10px;"
+              class="v-application elevation-10"
+            />
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -19,7 +40,39 @@ export default {
   name: "Home",
 
   data: () => ({
-    //
-  })
+    gifs: [
+      "https://media.giphy.com/media/txcIHRNl2vcDm/source.gif",
+      "https://media.giphy.com/media/1wh06XT53tPGw/source.gif",
+      "https://media.giphy.com/media/3oz8xyCpOResKKsoXm/source.gif",
+      "https://media.giphy.com/media/WdqlhBrNj2W3u/source.gif",
+      "https://media.giphy.com/media/YqiO23Q2gfurS/source.gif",
+      "https://media.giphy.com/media/KzWAhzWD3HrJyAcLEM/source.gif",
+      "https://media.giphy.com/media/l3vR1lFJYOSLXVNYI/giphy.gif",
+      "https://media.giphy.com/media/rD3qr1kIfSPsI/source.gif",
+      "https://media.giphy.com/media/WdqlhBrNj2W3u/source.gif",
+      "https://media.giphy.com/media/247U9uYBNscCc/source.gif",
+      "https://media.giphy.com/media/uQKc2CfocyFJ6/source.gif",
+      "https://media.giphy.com/media/9MIzdMaj7PkE4Tn2TD/source.gif",
+    ],
+    actualGif: "https://media.giphy.com/media/txcIHRNl2vcDm/source.gif",
+    visualizeGif: true
+  }),
+  mounted() {
+    this.rollGifs();
+  },
+  methods: {
+    async rollGifs() {
+      /* eslint-disable */
+      while (true) {
+        for (let x = 0; x < this.gifs.length; x++) {
+          this.actualGif = this.gifs[x];
+          /* eslint-disable */
+          await new Promise(r => setTimeout(r, 2000));
+          /* eslint-enable */
+        }
+      }
+    }
+    /* eslint-enable */
+  }
 };
 </script>

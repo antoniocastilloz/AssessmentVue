@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <v-app-bar app color="blue-grey darken-4" dark>
-      <div class="d-flex align-center">
-        ⚡Game
-        <strong>Catalog</strong>
+      <div class="d-flex align-center font-italic font-weight-bold">
+        <router-link to="/">
+          ⚡Game<strong>Catalog</strong>
+        </router-link>
       </div>
       <v-spacer></v-spacer>
       <v-btn to="/" text>Home</v-btn>
@@ -25,4 +26,9 @@ export default {
 </script>
 <style scoped>
 @import "./style.css";
+
+a{
+  color: white!important;
+  text-decoration: none;
+}
 </style>
