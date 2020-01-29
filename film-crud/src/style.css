@@ -1,0 +1,7 @@
+.heightFull{
+    min-height: 100%;
+}
+
+.bgGradient{
+    background: linear-gradient(to right, #06bfff 50%, #2b74ff 100%);
+}
