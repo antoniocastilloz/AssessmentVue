@@ -38,8 +38,18 @@
                 <div class="d-flex justify-center">
                   <v-select :items="type" label="Tipo" solo></v-select>
                 </div>
-                <v-switch dark prepend-icon="favorite" v-model="favorite" :label="`Favorito ? ${responseYesOrNoAccordBoolean(favorite)}`"></v-switch>
-                <v-switch dark prepend-icon="hourglass_full" v-model="full" :label="`Zerou ? ${responseYesOrNoAccordBoolean(full)}`"></v-switch>
+                <v-switch
+                  dark
+                  prepend-icon="favorite"
+                  v-model="favorite"
+                  :label="`Favorito ? ${responseYesOrNoAccordBoolean(favorite)}`"
+                ></v-switch>
+                <v-switch
+                  dark
+                  prepend-icon="hourglass_full"
+                  v-model="full"
+                  :label="`Zerou ? ${responseYesOrNoAccordBoolean(full)}`"
+                ></v-switch>
               </v-container>
 
               <small class="white--text">*Indica campos obrigatórios</small>
@@ -47,7 +57,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" text @click="dialog = false">Cancelar</v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false">Salvar</v-btn>
+              <v-btn color="blue darken-1" text @click="addGame">Salvar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -62,8 +72,10 @@ export default {
 
   data: () => ({
     dialog: false,
+    name: "",
     favorite: false,
     full: false,
+    description: "",
     type: [
       "Esporte",
       "Plataforma",
@@ -74,13 +86,18 @@ export default {
       "Terror"
     ]
   }),
-  methods:{
-    responseYesOrNoAccordBoolean(variable){
-      if(variable){
-        return "Sim !"
-      }else{
-        return "Não !"
+  methods: {
+    responseYesOrNoAccordBoolean(variable) {
+      if (variable) {
+        return "Sim !";
+      } else {
+        return "Não !";
       }
+    },
+    addGame() {
+      this.dialog = false;
+      var ObjectGame = { name: "teste" };
+      this.$store.commit("addGame", ObjectGame);
     }
   }
 };
