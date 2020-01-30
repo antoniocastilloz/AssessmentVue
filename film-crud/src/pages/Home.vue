@@ -68,7 +68,7 @@ export default {
         for (let x = 0; x < this.gifs.length; x++) {
           this.actualGif = this.gifs[x];
           /* eslint-disable */
-          await new Promise(r => setTimeout(r, 2000));
+          await new Promise(r => setTimeout(r, 1500));
           /* eslint-enable */
         }
       }

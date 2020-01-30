@@ -2,13 +2,7 @@
   <v-row class="white--text justify-center">
     <v-col cols="6">
       <v-row justify="center">
-        <v-dialog v-model="dialog" persistent max-width="600px">
-          <template v-slot:activator="{ on }">
-            <v-btn class="bgGradient" dark v-on="on" large>
-              Cadastrar Jogo
-              <v-icon class="ml-3">add</v-icon>
-            </v-btn>
-          </template>
+        <v-dialog v-model="modalCreateEdit" persistent max-width="600px">
           <v-card class="blue-grey darken-4">
             <v-card-title class="bgGradient">
               <span class="headline white--text">Jogo</span>
@@ -56,8 +50,8 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">Cancelar</v-btn>
-              <v-btn color="blue darken-1" text @click="addGame">Salvar</v-btn>
+              <v-btn color="blue darken-1" text @click="closeModalCreateEdit">Cancelar</v-btn>
+              <v-btn color="blue darken-1" text @click="closeModalCreateEdit">Salvar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -71,7 +65,6 @@ export default {
   name: "Forms",
 
   data: () => ({
-    dialog: false,
     name: "",
     favorite: false,
     full: false,
@@ -98,7 +91,15 @@ export default {
       this.dialog = false;
       var ObjectGame = { name: "teste" };
       this.$store.commit("addGame", ObjectGame);
+    },
+    closeModalCreateEdit(){
+      this.$store.commit("closeModalCreateEdit");
     }
+  },
+  computed:{
+    modalCreateEdit(){
+      return this.$store.state.modalCreateEdit;
+    },
   }
 };
 </script>

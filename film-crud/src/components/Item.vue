@@ -1,6 +1,15 @@
 <template>
   <v-row class="mx-3">
-    <v-col v-for="(jogo,index) in jogos" v-bind:key="index" cols="2" class="d-flex align-center">
+    <v-col
+      v-for="(jogo,index) in jogos"
+      v-bind:key="index"
+      xs="6"
+      sm="6"
+      md="3"
+      lg="3"
+      xl="2"
+      class="d-flex align-center"
+    >
       <v-card max-width="100%" class="mx-auto" style="width:100%; height:100%;">
         <v-list-item class="bgGradient">
           <v-list-item-content>
@@ -14,18 +23,32 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-img :src="jogo.image" min-height="194" ></v-img>
+        <v-img :src="jogo.image" min-height="194"></v-img>
 
         <v-card-text>{{jogo.description}}</v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn icon>
-            <v-icon>create</v-icon>
+          <v-btn icon @click="openModalCreateEdit">
+            <v-icon color="primary">create</v-icon>
           </v-btn>
-          <v-btn icon>
-            <v-icon>delete</v-icon>
-          </v-btn>
+
+          <v-dialog v-model="modalDelete" persistent max-width="290">
+            <template v-slot:activator="{ on }">
+              <v-btn icon>
+                <v-icon color="primary" v-on="on">delete</v-icon>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="headline">Excluir</v-card-title>
+              <v-card-text>Tem certeza que deseja excluir este jogo?</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green white--text" raised @click="modalDelete = false">Sim</v-btn>
+                <v-btn color="red white--text" raised @click="modalDelete = false">Não</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -36,10 +59,18 @@
 export default {
   name: "Item",
 
-  data: () => ({}),
+  data: () => ({
+    modalDelete: false,
+    modalEdit: false
+  }),
   computed: {
     jogos() {
       return this.$store.state.jogos;
+    }
+  },
+  methods: {
+    openModalCreateEdit() {
+      this.$store.commit("openModalCreateEdit");
     }
   }
 };
