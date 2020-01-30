@@ -40,11 +40,11 @@
               </v-btn>
             </template>
             <v-card>
-              <v-card-title class="headline">Excluir</v-card-title>
-              <v-card-text>Tem certeza que deseja excluir este jogo?</v-card-text>
+              <v-card-title class="headline bgGradient white--text">Excluir</v-card-title>
+              <v-card-text class="pb-0 pt-4">Tem certeza que deseja excluir este jogo?</v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green white--text" raised @click="modalDelete = false">Sim</v-btn>
+                <v-btn color="green white--text" raised @click="deleteGame(index)">Sim</v-btn>
                 <v-btn color="red white--text" raised @click="modalDelete = false">Não</v-btn>
               </v-card-actions>
             </v-card>
@@ -71,6 +71,10 @@ export default {
   methods: {
     openModalCreateEdit() {
       this.$store.commit("openModalCreateEdit");
+    },
+    deleteGame(variable){
+      this.modalDelete = false
+      this.$store.commit("deleteGame",variable)
     }
   }
 };

@@ -15,6 +15,9 @@ export default new Vuex.Store({
         addGame(state, variable) {
             state.jogos.push(variable)
         },
+        deleteGame(state, variable){
+            state.jogos.splice(variable,1)
+        },
         openModalCreateEdit(state){
             state.modalCreateEdit = true
         },
