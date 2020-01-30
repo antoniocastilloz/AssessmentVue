@@ -4,27 +4,26 @@
       Cadastrar Jogo
       <v-icon class="ml-3">add</v-icon>
     </v-btn>
-    <Forms />
+    <ModalCreateEdit />
+    <ModalDelete />
     <Item />
   </div>
 </template>
 
 <script>
-import Forms from "../components/Forms";
+import ModalCreateEdit from "../components/ModalCreateEdit";
+import ModalDelete from "../components/ModalDelete";
 import Item from "../components/Item";
 
 export default {
   name: "Aplicacao",
   components: {
-    Forms,
+    ModalCreateEdit,
+    ModalDelete,
     Item
   },
-
-  data: () => ({
-    //
-  }),
-  methods:{
-    openModalCreateEdit(){
+  methods: {
+    openModalCreateEdit() {
       this.$store.commit("openModalCreateEdit");
     }
   }

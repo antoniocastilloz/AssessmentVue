@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app color="blue-grey darken-4" dark>
-      <div class="align-center font-italic font-weight-bold d-none d-sm-block">
+      <div class="align-center font-italic font-weight-bold d-none d-sm-flex">
         <router-link to="/">
           ⚡Game<strong>Catalog</strong>
         </router-link>
