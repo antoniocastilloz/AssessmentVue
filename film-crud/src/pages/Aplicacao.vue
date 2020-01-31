@@ -1,12 +1,13 @@
 <template>
   <div class="grey darken-4 white--text text-center heightFull">
-    <v-btn class="bgGradient mt-10 mb-8 elevation-10" dark large @click="openModalCreateEdit">
+    <v-btn class="bgGradient mt-10 mb-8 elevation-10" dark large to="/app/createoredit" @click="openModalCreateEdit">
       Cadastrar Jogo
       <v-icon class="ml-3">add</v-icon>
     </v-btn>
-    <ModalCreateEdit />
-    <ModalDelete />
+    <!-- <ModalCreateEdit />
+    <ModalDelete /> -->
     <Item />
+    <router-view></router-view>
     <div class="text-center">
       <v-snackbar
         v-model="snackbar"
@@ -20,15 +21,15 @@
 </template>
 
 <script>
-import ModalCreateEdit from "../components/ModalCreateEdit";
-import ModalDelete from "../components/ModalDelete";
+// import ModalCreateEdit from "../components/ModalCreateEdit";
+// import ModalDelete from "../components/ModalDelete";
 import Item from "../components/Item";
 
 export default {
   name: "Aplicacao",
   components: {
-    ModalCreateEdit,
-    ModalDelete,
+    // ModalCreateEdit,
+    // ModalDelete,
     Item
   },
   data: () => ({

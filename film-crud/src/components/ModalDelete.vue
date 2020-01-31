@@ -7,8 +7,8 @@
       >Tem certeza que deseja excluir "{{jogos[actualIndex].name}}" da sua lista de jogos ?</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="deleteGame">Sim</v-btn>
-        <v-btn color="blue darken-1" text @click="closeModalDelete">Não</v-btn>
+        <v-btn color="blue darken-1" text to="/app" @click="deleteGame">Sim</v-btn>
+        <v-btn color="blue darken-1" text to="/app" @click="closeModalDelete">Não</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
