@@ -5,48 +5,90 @@
         <span class="headline white--text">Jogo</span>
       </v-card-title>
       <v-card-text>
-        <v-container class="text-center">
+        <v-container>
+          <small v-if="isEdit" class="white--text">
+            <small class="white--text">Informações antes de atualizar</small>
+            <v-list>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title class="text-center">Nome: {{jogos[actualIndex].name}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item>
+                <v-list-item-content>Descrição: {{jogos[actualIndex].description}}</v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item>
+                <v-list-item-content>Image-Url: {{jogos[actualIndex].image}}</v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title class="text-center">Tipo: {{jogos[actualIndex].type}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title
+                    class="text-center"
+                  >Favorito: {{responseYesOrNoAccordBoolean(jogos[actualIndex].favorite)}} / Zerou: {{responseYesOrNoAccordBoolean(jogos[actualIndex].full)}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </small>
           <br />
-          <v-text-field
-            color="blue*"
-            v-model="actualGame.name"
-            placeholder="Nome*"
-            append-icon="view_headline"
-            required
-            solo
-          ></v-text-field>
-          <v-textarea
-            append-icon="description"
-            v-model="actualGame.description"
-            solo
-            name="input-7-4"
-            label="Descrição*"
-          ></v-textarea>
-          <v-text-field
-            color="blue*"
-            v-model="actualGame.image"
-            placeholder="Url da imagem"
-            append-icon="camera"
-            required
-            solo
-          ></v-text-field>
-          <div class="d-flex justify-center">
-            <v-select :items="types" label="Tipo" v-model="actualGame.type" solo></v-select>
-          </div>
-          <v-switch
-            dark
-            prepend-icon="favorite"
-            v-model="actualGame.favorite"
-            :label="`Favorito ? ${responseYesOrNoAccordBoolean(actualGame.favorite)}`"
-          ></v-switch>
-          <v-switch
-            dark
-            prepend-icon="hourglass_full"
-            v-model="actualGame.full"
-            :label="`Zerou ? ${responseYesOrNoAccordBoolean(actualGame.full)}`"
-          ></v-switch>
+          <small class="white--text">Formulário</small>
+          <v-form ref="form">
+            <v-text-field
+              color="blue*"
+              v-model="actualGame.name"
+              placeholder="Nome*"
+              append-icon="view_headline"
+              :rules="inputRules"
+              required
+              solo
+            ></v-text-field>
+            <v-textarea
+              append-icon="description"
+              v-model="actualGame.description"
+              solo
+              :rules="inputRules"
+              name="input-7-4"
+              label="Descrição*"
+            ></v-textarea>
+            <v-text-field
+              color="blue*"
+              v-model="actualGame.image"
+              placeholder="Url da imagem"
+              append-icon="camera"
+              required
+              solo
+            ></v-text-field>
+            <div class="d-flex justify-center">
+              <v-select
+                :items="types"
+                :rules="inputRules"
+                label="Tipo*"
+                v-model="actualGame.type"
+                solo
+              ></v-select>
+            </div>
+            <v-switch
+              dark
+              prepend-icon="favorite"
+              v-model="actualGame.favorite"
+              :label="`Favorito ? ${responseYesOrNoAccordBoolean(actualGame.favorite)}`"
+            ></v-switch>
+            <v-switch
+              dark
+              prepend-icon="hourglass_full"
+              v-model="actualGame.full"
+              :label="`Zerou ? ${responseYesOrNoAccordBoolean(actualGame.full)}`"
+            ></v-switch>
+          </v-form>
         </v-container>
-
         <small class="white--text">*Indica campos obrigatórios</small>
       </v-card-text>
       <v-card-actions>
@@ -84,7 +126,8 @@ export default {
       "Tiro",
       "Estratégia",
       "Terror"
-    ]
+    ],
+    inputRules: [v => v.length > 0 || "Campo obrigatório"]
   }),
   computed: {
     modalCreateEdit() {
@@ -95,6 +138,9 @@ export default {
     },
     jogos() {
       return this.$store.state.jogos;
+    },
+    actualIndex() {
+      return this.$store.state.actualIndex;
     }
   },
   methods: {
@@ -106,23 +152,25 @@ export default {
       }
     },
     addOrEditGame() {
-      console.log(this.isEdit); // eslint-disable-line
-      var newObject = {
-        name: this.actualGame.name,
-        date: this.actualGame.date,
-        type: this.actualGame.type,
-        favorite: this.actualGame.favorite,
-        full: this.actualGame.full,
-        image: this.actualGame.image,
-        description: this.actualGame.description
-      };
-      if (this.isEdit) {
-        this.editGame(newObject);
-      } else {
-        this.addGame(newObject);
+      if (this.$refs.form.validate()) {
+        // console.log(this.isEdit); // eslint-disable-line
+        var newObject = {
+          name: this.actualGame.name,
+          date: this.actualGame.date,
+          type: this.actualGame.type,
+          favorite: this.actualGame.favorite,
+          full: this.actualGame.full,
+          image: this.actualGame.image,
+          description: this.actualGame.description
+        };
+        if (this.isEdit) {
+          this.editGame(newObject);
+        } else {
+          this.addGame(newObject);
+        }
+        this.clearInputs();
+        this.closeModalCreateEdit();
       }
-      this.closeModalCreateEdit();
-      this.clearInputs();
     },
     addGame(object) {
       this.$store.commit("addGame", object);

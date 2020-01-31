@@ -19,8 +19,8 @@
         <v-list-item class="bgGradient">
           <v-list-item-content>
             <v-list-item-title class="headline white--text">{{jogo.name}}</v-list-item-title>
-            <v-list-item-subtitle class="mb-2 white--text">Data: {{jogo.date}}</v-list-item-subtitle>
-            <v-list-item-subtitle class="mb-2 white--text">Tipo: {{jogo.type}}</v-list-item-subtitle>
+            <v-list-item-subtitle class="mb-2 white--text">{{jogo.date}}</v-list-item-subtitle>
+            <v-list-item-subtitle class="mb-2 white--text">{{jogo.type}}</v-list-item-subtitle>
             <div style="min-height:24px;">
               <v-icon color="white" v-if="jogo.favorite">mdi-heart</v-icon>
               <v-icon color="white" v-if="jogo.full">hourglass_full</v-icon>
