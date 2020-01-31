@@ -13,7 +13,7 @@
       <v-card
         v-if="index != jogos.length -1"
         max-width="100%"
-        class="mx-auto"
+        class="mx-auto elevation-10"
         style="width:100%; height:100%;"
       >
         <v-list-item class="bgGradient">
@@ -59,12 +59,11 @@ export default {
       if (index > -1) {
         this.$store.commit("setActualIndex", index);
       }
-      this.$store.commit("openModalCreateEdit");
+      this.$store.commit("openModalCreateEdit", true);
     },
     openModalDelete(index) {
       this.$store.commit("setActualIndex", index);
       this.$store.commit("openModalDelete");
-      console.log("variable"); // eslint-disable-line
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="grey darken-4 white--text text-center heightFull">
-    <v-btn class="bgGradient mt-10" dark large @click="openModalCreateEdit">
+    <v-btn class="bgGradient mt-10 mb-8 elevation-10" dark large @click="openModalCreateEdit">
       Cadastrar Jogo
       <v-icon class="ml-3">add</v-icon>
     </v-btn>
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     openModalCreateEdit() {
-      this.$store.commit("openModalCreateEdit");
+      this.$store.commit("openModalCreateEdit", false);
     }
   }
 };

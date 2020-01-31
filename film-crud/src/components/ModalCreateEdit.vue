@@ -15,7 +15,13 @@
             required
             solo
           ></v-text-field>
-          <v-textarea append-icon="description" solo name="input-7-4" label="Descrição*"></v-textarea>
+          <v-textarea
+            append-icon="description"
+            v-model="actualGame.description"
+            solo
+            name="input-7-4"
+            label="Descrição*"
+          ></v-textarea>
           <v-text-field
             color="blue*"
             v-model="actualGame.image"
@@ -25,7 +31,7 @@
             solo
           ></v-text-field>
           <div class="d-flex justify-center">
-            <v-select :items="type" label="Tipo" solo></v-select>
+            <v-select :items="types" label="Tipo" v-model="actualGame.type" solo></v-select>
           </div>
           <v-switch
             dark
@@ -46,7 +52,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click="closeModalCreateEdit">Cancelar</v-btn>
-        <v-btn color="blue darken-1" text @click="addGame">Salvar</v-btn>
+        <v-btn color="blue darken-1" text @click="addOrEditGame">Salvar</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -70,7 +76,7 @@ export default {
       image: "",
       description: ""
     },
-    type: [
+    types: [
       "Esporte",
       "Plataforma",
       "Luta",
@@ -83,6 +89,12 @@ export default {
   computed: {
     modalCreateEdit() {
       return this.$store.state.modalCreateEdit;
+    },
+    isEdit() {
+      return this.$store.state.isEdit;
+    },
+    jogos() {
+      return this.$store.state.jogos;
     }
   },
   methods: {
@@ -93,12 +105,41 @@ export default {
         return "Não !";
       }
     },
-    addGame() {
-      this.$store.commit("addGame", this.actualGame);
+    addOrEditGame() {
+      console.log(this.isEdit); // eslint-disable-line
+      var newObject = {
+        name: this.actualGame.name,
+        date: this.actualGame.date,
+        type: this.actualGame.type,
+        favorite: this.actualGame.favorite,
+        full: this.actualGame.full,
+        image: this.actualGame.image,
+        description: this.actualGame.description
+      };
+      if (this.isEdit) {
+        this.editGame(newObject);
+      } else {
+        this.addGame(newObject);
+      }
       this.closeModalCreateEdit();
+      this.clearInputs();
+    },
+    addGame(object) {
+      this.$store.commit("addGame", object);
+    },
+    editGame(object) {
+      this.$store.commit("editGame", object);
     },
     closeModalCreateEdit() {
       this.$store.commit("closeModalCreateEdit");
+    },
+    clearInputs() {
+      this.actualGame.name = "";
+      this.actualGame.type = "";
+      this.actualGame.favorite = false;
+      this.actualGame.full = false;
+      this.actualGame.image = "";
+      this.actualGame.description = "";
     }
   }
 };
