@@ -7,6 +7,15 @@
     <ModalCreateEdit />
     <ModalDelete />
     <Item />
+    <div class="text-center">
+      <v-snackbar
+        v-model="snackbar"
+        :timeout="timeout"
+        :top="true"
+        color="info"
+        class="text-center"
+      >Você já adicionou 5 jogos !!!</v-snackbar>
+    </div>
   </div>
 </template>
 
@@ -22,9 +31,25 @@ export default {
     ModalDelete,
     Item
   },
+  data: () => ({
+    snackbar: false,
+    timeout: 3000
+  }),
+  computed: {
+    jogos() {
+      return this.$store.state.jogos;
+    }
+  },
   methods: {
     openModalCreateEdit() {
       this.$store.commit("openModalCreateEdit", false);
+    }
+  },
+  watch: {
+    jogos: function() {
+      if (this.jogos.length == 6) {
+        this.snackbar = true;
+      }
     }
   }
 };
