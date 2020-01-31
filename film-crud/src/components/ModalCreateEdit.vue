@@ -6,38 +6,6 @@
       </v-card-title>
       <v-card-text>
         <v-container>
-          <small v-if="isEdit" class="white--text">
-            <small class="white--text">Informações antes de atualizar</small>
-            <v-list>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title class="text-center">Nome: {{jogos[actualIndex].name}}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-divider></v-divider>
-              <v-list-item>
-                <v-list-item-content>Descrição: {{jogos[actualIndex].description}}</v-list-item-content>
-              </v-list-item>
-              <v-divider></v-divider>
-              <v-list-item>
-                <v-list-item-content>Image-Url: {{jogos[actualIndex].image}}</v-list-item-content>
-              </v-list-item>
-              <v-divider></v-divider>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title class="text-center">Tipo: {{jogos[actualIndex].type}}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-divider></v-divider>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title
-                    class="text-center"
-                  >Favorito: {{responseYesOrNoAccordBoolean(jogos[actualIndex].favorite)}} / Zerou: {{responseYesOrNoAccordBoolean(jogos[actualIndex].full)}}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </small>
           <br />
           <small class="white--text">Formulário</small>
           <v-form ref="form">
@@ -154,14 +122,14 @@ export default {
     addOrEditGame() {
       if (this.$refs.form.validate()) {
         // console.log(this.isEdit); // eslint-disable-line
-        var newObject = {
-          name: this.actualGame.name,
-          date: this.actualGame.date,
-          type: this.actualGame.type,
-          favorite: this.actualGame.favorite,
-          full: this.actualGame.full,
-          image: this.actualGame.image,
-          description: this.actualGame.description
+        let newObject = {
+          name: this.jogos.slice()[this.actualIndex].name,
+          date: this.jogos.slice()[this.actualIndex].date,
+          type: this.jogos.slice()[this.actualIndex].type,
+          favorite: this.jogos.slice()[this.actualIndex].favorite,
+          full: this.jogos.slice()[this.actualIndex].full,
+          image: this.jogos.slice()[this.actualIndex].image,
+          description: this.jogos.slice()[this.actualIndex].description
         };
         if (this.isEdit) {
           this.editGame(newObject);
@@ -170,6 +138,7 @@ export default {
         }
         this.clearInputs();
         this.closeModalCreateEdit();
+        console.log(this.jogos.slice()[this.actualIndex]); // eslint-disable-line
       }
     },
     addGame(object) {
@@ -188,6 +157,25 @@ export default {
       this.actualGame.full = false;
       this.actualGame.image = "";
       this.actualGame.description = "";
+    }
+  },
+  watch: {
+    modalCreateEdit: function() {
+      if (this.modalCreateEdit && this.isEdit) {
+        this.actualGame.name = this.jogos.slice()[this.actualIndex].name;
+        this.actualGame.data = this.jogos.slice()[this.actualIndex].data;
+        this.actualGame.type = this.jogos.slice()[this.actualIndex].type;
+        this.actualGame.favorite = this.jogos.slice()[
+          this.actualIndex
+        ].favorite;
+        this.actualGame.full = this.jogos.slice()[this.actualIndex].full;
+        this.actualGame.image = this.jogos.slice()[this.actualIndex].image;
+        this.actualGame.description = this.jogos.slice()[
+          this.actualIndex
+        ].description;
+      } else {
+        this.clearInputs();
+      }
     }
   }
 };
