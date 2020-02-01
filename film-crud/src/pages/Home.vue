@@ -1,7 +1,7 @@
 <template>
   <div class="heightFull grey darken-4 d-flex align-center">
-    <v-row class="white--text justify-center">
-      <v-col xs="11" sm="11" md="5" lg="4" class="d-flex align-center justify-center">
+    <v-row v-if="this.$route.path == '/'" class="white--text justify-center">
+      <v-col xs="11" sm="11" md="5" lg="4" offset-lg="1" class="d-flex align-center justify-center">
         <v-row class="d-flex justify-center">
           <v-col elevation="23">
             <h1 class="display-2 font-italic font-weight-bold">⚡GameCatalog</h1>
@@ -31,6 +31,7 @@
         </v-row>
       </v-col>
     </v-row>
+    <router-view></router-view>
   </div>
 </template>
 <style scoped>

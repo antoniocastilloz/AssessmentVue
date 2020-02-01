@@ -7,8 +7,10 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
-      <v-btn to="/" text><v-icon class="mr-3">home</v-icon>Home</v-btn>
-      <v-btn to="/app" text class="mx-4"><v-icon class="mr-3">exit_to_app</v-icon>App</v-btn>
+      
+      <v-btn v-if="this.$route.path != '/'" to="/" text ><v-icon class="mr-3">home</v-icon>Home</v-btn>
+      <v-btn v-if="this.$route.path != '/app'" to="/app" text class="ml-3"><v-icon class="mr-3">exit_to_app</v-icon>App</v-btn>
+      <v-btn v-if="this.$route.path != '/app'" to="/sobre" text class="ml-3"><v-icon class="mr-3">person</v-icon>Sobre</v-btn>
     </v-app-bar>
     <v-content>
       <router-view></router-view>
@@ -19,9 +21,11 @@
 <script>
 export default {
   name: "App",
-  data: () => ({
-    //
-  })
+  created(){
+    if (this.$route.path == '/Vue-GameCatalog/') {
+      this.$router.push( '/' );
+    }
+  }
 };
 </script>
 <style scoped>
