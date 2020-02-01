@@ -34,10 +34,10 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn icon to="/app/createoredit" @click="openModalCreateEdit(index)">
+          <v-btn icon @click="openModalCreateEdit(index)">
             <v-icon color="primary">create</v-icon>
           </v-btn>
-          <v-btn icon to="/app/delete" @click="openModalDelete(index)">
+          <v-btn icon @click="openModalDelete(index)">
             <v-icon color="primary">delete</v-icon>
           </v-btn>
         </v-card-actions>
