@@ -123,13 +123,13 @@ export default {
       if (this.$refs.form.validate()) {
         // console.log(this.isEdit); // eslint-disable-line
         let newObject = {
-          name: this.jogos.slice()[this.actualIndex].name,
-          date: this.jogos.slice()[this.actualIndex].date,
-          type: this.jogos.slice()[this.actualIndex].type,
-          favorite: this.jogos.slice()[this.actualIndex].favorite,
-          full: this.jogos.slice()[this.actualIndex].full,
-          image: this.jogos.slice()[this.actualIndex].image,
-          description: this.jogos.slice()[this.actualIndex].description
+          name: this.actualGame.name,
+          date: this.actualGame.date,
+          type: this.actualGame.type,
+          favorite: this.actualGame.favorite,
+          full: this.actualGame.full,
+          image: this.actualGame.image,
+          description: this.actualGame.description
         };
         if (this.isEdit) {
           this.editGame(newObject);
