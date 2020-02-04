@@ -6,6 +6,11 @@
     background: linear-gradient(to right, #06bfff 50%, #2b74ff 100%);
 }
 
+.bgGradientError{
+  /* background: linear-gradient(to right, #d48b00 50%, #f94000 100%); */
+  background: linear-gradient(to right, #ff8800 50%, #f90000 100%);
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 0px;

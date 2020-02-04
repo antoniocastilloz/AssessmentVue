@@ -93,13 +93,10 @@ export default {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then(this.$store.commit("openModalCadastro"))
-          .catch(
-            this.$store.commit("closeModalCadastro"),
-            function(error) {
-            
-            console.log(error.code + " " + error.message); // eslint-disable-line
-          });
+          .catch(error =>
+            this.$store.commit("updateMessageModalCadastro", error.message)
+          );
+          this.$store.commit("openModalCadastro")
       }
     }
   },
