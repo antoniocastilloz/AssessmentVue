@@ -10,7 +10,7 @@
               class="headline"
             >O GameCatalog é o melhor sistema para catalogar os jogos que você já completou ou está jogando.</p>
             <br />
-            <v-btn elevation="10" class="bgGradient white--text" to="/app" raised block large>
+            <v-btn elevation="10" class="bgGradient white--text" to="/login" raised block large>
               Fazer Login
               <v-icon dark right>double_arrow</v-icon>
             </v-btn>

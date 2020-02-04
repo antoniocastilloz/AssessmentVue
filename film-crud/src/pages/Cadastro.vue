@@ -15,6 +15,7 @@
                 append-icon="email"
                 required
                 solo
+                :rules="[rules.required, rules.email]"
               ></v-text-field>
               <v-text-field
                 v-model="password"
@@ -24,13 +25,14 @@
                 append-icon="lock"
                 required
                 solo
+                :rules="[rules.required, rules.counter]"
               ></v-text-field>
               <v-text-field
                 v-model="confirmPassword"
                 type="password"
                 color="blue"
                 placeholder="Confirmarção da senha"
-                :rules="[comparePasswords]"
+                :rules="[rules.required, rules.counter,comparePasswords]"
                 append-icon="lock"
                 required
                 solo
@@ -48,19 +50,36 @@
         </v-row>
       </v-col>
     </v-row>
+    <ModalCadastro />
   </div>
 </template>
 
 <script>
-import * as firebase from 'firebase';
+import ModalCadastro from "../components/Cadastro/ModalCadastro";
+
+import * as firebase from "firebase";
 
 export default {
   name: "Cadastro",
-  data: () => ({
-    email: "",
-    password: "",
-    confirmPassword: ""
-  }),
+  components: {
+    ModalCadastro
+  },
+  data() {
+    return {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      rules: {
+        required: value => !!value || "Campo requerido.",
+        counter: value =>
+          value.length >= 6 || "A senha deve contar com 6 ou mais caracteres",
+        email: value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "E-mail inválido.";
+        }
+      }
+    };
+  },
   computed: {
     comparePasswords() {
       return this.password !== this.confirmPassword
@@ -70,7 +89,18 @@ export default {
   },
   methods: {
     onSignup() {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then()
+      if (this.$refs.form.validate()) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+          .then(this.$store.commit("openModalCadastro"))
+          .catch(
+            this.$store.commit("closeModalCadastro"),
+            function(error) {
+            
+            console.log(error.code + " " + error.message); // eslint-disable-line
+          });
+      }
     }
   },
   watch: {}

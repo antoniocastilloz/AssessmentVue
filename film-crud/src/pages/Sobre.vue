@@ -30,15 +30,18 @@ export default {
     return {
       icons: [
         "mdi-language-javascript",
-        "mdi-angular",
         "mdi-vuejs",
+        "mdi-angular",
+        "mdi-react",
         "mdi-angularjs",
+        "mdi-jquery",
         "mdi-language-html5",
         "mdi-language-css3",
         "mdi-bootstrap",
         "mdi-material-design",
+        "mdi-vuetify",
         "mdi-nodejs",
-        "mdi-jquery",
+        "mdi-firebase",
         "mdi-visual-studio-code",
         "mdi-adobe"
       ]

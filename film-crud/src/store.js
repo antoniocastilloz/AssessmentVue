@@ -9,6 +9,7 @@ export default new Vuex.Store({
         actualIndex: 0,
         modalCreateEdit: false,
         modalDelete: false,
+        modalCadastro: false,
         jogos: [
             { name: "Sonic", date: "30/1/2020", type: "Plataforma", favorite: true, full: true, image: "https://kanto.legiaodosherois.com.br/w760-h398-gnw-cfill-q80/wp-content/uploads/2020/01/legiao_Z1Rr3VKwx0Qlo2bX97iTz5GNBgedWSyFJLanOs8DUu.jpg.jpeg", description: "Sonic The Hedgedog ou apenas Sonic é o principal personagem de um dos games mais famosos da atualidade e o principal símbolo da SEGA." },
             { name: "The King Of Fighters", date: "30/1/2020", type: "Luta", favorite: false, full: true, image: "https://www.gamerview.com.br/wp-content/uploads/2019/10/The-King-of-Fighters-All-Star_bg.jpg", description: "The King of Fighters foi criado para ser um jogo que estrelasse os principais personagens da SNK independentemente de qualquer detalhe cronológico ou canônico." },
@@ -43,6 +44,12 @@ export default new Vuex.Store({
         },
         closeModalDelete(state) {
             state.modalDelete = false
+        },
+        openModalCadastro(state) {
+            state.modalCadastro = true
+        },
+        closeModalCadastro(state) {
+            state.modalCadastro = false
         },
     }
 
