@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import ModalCreateEdit from "../components/ModalCreateEdit";
-import ModalDelete from "../components/ModalDelete";
-import Item from "../components/Item";
+import ModalCreateEdit from "../components/Aplicacao/ModalCreateEdit";
+import ModalDelete from "../components/Aplicacao/ModalDelete";
+import Item from "../components/Aplicacao/Item";
 
 export default {
   name: "Aplicacao",

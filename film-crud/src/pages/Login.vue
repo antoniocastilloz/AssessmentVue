@@ -7,10 +7,26 @@
             <h1 class="display-2 font-italic font-weight-bold text-center">Login</h1>
             <br />
             <v-form ref="form">
-              <v-text-field type="email" color="blue" placeholder="E-mail" append-icon="email" required solo></v-text-field>
-              <v-text-field type="password" color="blue" placeholder="Senha" append-icon="lock" required solo></v-text-field>
+              <v-text-field
+                v-model="email"
+                type="email"
+                color="blue"
+                placeholder="E-mail"
+                append-icon="email"
+                required
+                solo
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                type="password"
+                color="blue"
+                placeholder="Senha"
+                append-icon="lock"
+                required
+                solo
+              ></v-text-field>
             </v-form>
-            <v-btn elevation="10" class="bgGradient white--text" to="/app" raised block large>Entrar</v-btn>
+            <v-btn elevation="10" class="bgGradient white--text" @click="login" raised block large>Entrar</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -19,12 +35,25 @@
 </template>
 
 <script>
+import * as firebase from "firebase";
+
 export default {
   name: "Login",
   components: {},
-  data: () => ({}),
+  data: () => ({
+    email: "",
+    password: ""
+  }),
   computed: {},
-  methods: {},
+  methods: {
+    login() {
+      firebase.auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(cred => {
+          console.log(cred.user); // eslint-disable-line
+        });
+    }
+  },
   watch: {}
 };
 </script>
