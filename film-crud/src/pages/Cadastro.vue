@@ -8,6 +8,7 @@
             <br />
             <v-form ref="form">
               <v-text-field
+                v-model="email"
                 type="email"
                 color="blue"
                 placeholder="E-mail"
@@ -16,6 +17,7 @@
                 solo
               ></v-text-field>
               <v-text-field
+                v-model="password"
                 type="password"
                 color="blue"
                 placeholder="Senha"
@@ -24,9 +26,11 @@
                 solo
               ></v-text-field>
               <v-text-field
+                v-model="confirmPassword"
                 type="password"
                 color="blue"
                 placeholder="Confirmarção da senha"
+                :rules="[comparePasswords]"
                 append-icon="lock"
                 required
                 solo
@@ -35,7 +39,7 @@
             <v-btn
               elevation="10"
               class="bgGradient white--text"
-              to="/app"
+              @click="onSignup"
               raised
               block
               large
@@ -48,12 +52,27 @@
 </template>
 
 <script>
+import * as firebase from 'firebase';
+
 export default {
   name: "Cadastro",
-  components: {},
-  data: () => ({}),
-  computed: {},
-  methods: {},
+  data: () => ({
+    email: "",
+    password: "",
+    confirmPassword: ""
+  }),
+  computed: {
+    comparePasswords() {
+      return this.password !== this.confirmPassword
+        ? "As senhas devem ser iguais!"
+        : true;
+    }
+  },
+  methods: {
+    onSignup() {
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then()
+    }
+  },
   watch: {}
 };
 </script>
