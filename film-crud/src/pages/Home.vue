@@ -11,7 +11,7 @@
             >O GameCatalog é o melhor sistema para catalogar os jogos que você já completou ou está jogando.</p>
             <br />
             <v-btn elevation="10" class="bgGradient white--text" to="/app" raised block large>
-              Ir para o aplicativo
+              Fazer Login
               <v-icon dark right>double_arrow</v-icon>
             </v-btn>
           </v-col>

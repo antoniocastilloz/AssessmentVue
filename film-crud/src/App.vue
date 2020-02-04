@@ -9,8 +9,9 @@
       <v-spacer></v-spacer>
       
       <v-btn v-if="this.$route.path != '/'" to="/" text ><v-icon class="mr-3">home</v-icon>Home</v-btn>
-      <v-btn v-if="this.$route.path != '/app'" to="/app" text class="ml-3"><v-icon class="mr-3">exit_to_app</v-icon>App</v-btn>
       <v-btn v-if="this.$route.path != '/app'" to="/sobre" text class="ml-3"><v-icon class="mr-3">person</v-icon>Sobre</v-btn>
+      <v-btn v-if="this.$route.path != '/app'" to="/login" text class="ml-3"><v-icon class="mr-3">exit_to_app</v-icon>Login</v-btn>
+      <v-btn v-if="this.$route.path != '/app'" to="/cadastro" text class="ml-3"><v-icon class="mr-3">assignment</v-icon>Cadastrar-se</v-btn>
     </v-app-bar>
     <v-content>
       <router-view></router-view>
