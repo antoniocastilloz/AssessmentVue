@@ -26,20 +26,32 @@
                 solo
               ></v-text-field>
             </v-form>
-            <v-btn elevation="10" class="bgGradient white--text" @click="login" raised block large>Entrar</v-btn>
+            <v-btn
+              elevation="10"
+              class="bgGradient white--text"
+              @click="login"
+              raised
+              block
+              large
+            >Entrar</v-btn>
           </v-col>
         </v-row>
       </v-col>
     </v-row>
+    <ModalError />
   </div>
 </template>
 
 <script>
+import ModalError from "../components/Generic/ModalError";
+
 import * as firebase from "firebase";
 
 export default {
   name: "Login",
-  components: {},
+  components: {
+    ModalError
+  },
   data: () => ({
     email: "",
     password: ""
@@ -47,10 +59,15 @@ export default {
   computed: {},
   methods: {
     login() {
-      firebase.auth()
+      firebase
+        .auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(cred => {
-          console.log(cred.user); // eslint-disable-line
+        .then(data => {
+          console.log(data.user); // eslint-disable-line
+           this.$router.push("/app");
+        })
+        .catch(error => {
+          console.log(error.user); // eslint-disable-line
         });
     }
   },

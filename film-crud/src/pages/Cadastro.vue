@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import ModalSuccess from "../components/Cadastro/ModalSuccess";
-import ModalError from "../components/Cadastro/ModalError";
+import ModalSuccess from "../components/Generic/ModalSuccess";
+import ModalError from "../components/Generic/ModalError";
 
 import * as firebase from "firebase";
 
