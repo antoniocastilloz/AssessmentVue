@@ -50,19 +50,22 @@
         </v-row>
       </v-col>
     </v-row>
-    <ModalCadastro />
+    <ModalSuccess />
+    <ModalError />
   </div>
 </template>
 
 <script>
-import ModalCadastro from "../components/Cadastro/ModalCadastro";
+import ModalSuccess from "../components/Cadastro/ModalSuccess";
+import ModalError from "../components/Cadastro/ModalError";
 
 import * as firebase from "firebase";
 
 export default {
   name: "Cadastro",
   components: {
-    ModalCadastro
+    ModalSuccess,
+    ModalError
   },
   data() {
     return {
@@ -93,12 +96,19 @@ export default {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .catch(error =>
-            this.$store.commit("updateMessageModalCadastro", error.message)
-          );
-          this.$store.commit("openModalCadastro")
+          .then(() => {
+            this.$store.commit("openModalSuccessCadastro");
+          })
+          .catch(error => {
+            let translatedError = "";
+            if (error.code == "auth/email-already-in-use") {
+              translatedError = "Este e-mail já está em uso tente outro.";
+            }
+            this.$store.commit("openModalErrorCadastro", translatedError);
+          });
       }
-    }
+    },
+    verifyError() {}
   },
   watch: {}
 };

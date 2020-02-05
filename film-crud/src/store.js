@@ -9,11 +9,10 @@ export default new Vuex.Store({
         actualIndex: 0,
         modalCreateEdit: false,
         modalDelete: false,
-        modalCadastro: {
+        modalSuccess: false,
+        modalError: {
             open: false,
-            title: "Parabéns!",
-            message: "Sua conta foi criada com sucesso.",
-            labelBtn: "Fazer Login",
+            message: "fds",
         },
         jogos: [
             { name: "Sonic", date: "30/1/2020", type: "Plataforma", favorite: true, full: true, image: "https://kanto.legiaodosherois.com.br/w760-h398-gnw-cfill-q80/wp-content/uploads/2020/01/legiao_Z1Rr3VKwx0Qlo2bX97iTz5GNBgedWSyFJLanOs8DUu.jpg.jpeg", description: "Sonic The Hedgedog ou apenas Sonic é o principal personagem de um dos games mais famosos da atualidade e o principal símbolo da SEGA." },
@@ -50,23 +49,22 @@ export default new Vuex.Store({
         closeModalDelete(state) {
             state.modalDelete = false
         },
-        openModalCadastro(state) {
-            state.modalCadastro.open = true
+        openModalSuccessCadastro(state) {
+            state.modalSuccess = true
         },
-        closeModalCadastro(state) {
-            state.modalCadastro = {
+        closeModalSuccessCadastro(state) {
+            state.modalSuccess = false
+        },
+        openModalErrorCadastro(state, message) {
+            state.modalError.open = true
+            state.modalError.message = message
+        },
+        closeModalErrorCadastro(state) {
+            state.modalError = {
                 open: false,
-                title: "Parabéns!",
-                message: "Sua conta foi criada com sucesso.",
-                labelBtn: "Fazer Login",
+                message: "",
             }
         },
-        //mensagem ModalCadastro
-        updateMessageModalCadastro(state, message){
-            state.modalCadastro.title = "Erro"
-            state.modalCadastro.message = message
-            state.modalCadastro.labelBtn = "voltar"
-        }
     }
 
 });
