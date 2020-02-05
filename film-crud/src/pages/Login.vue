@@ -13,6 +13,7 @@
                 color="blue"
                 placeholder="E-mail"
                 append-icon="email"
+                :rules="[rules.required,rules.email]"
                 required
                 solo
               ></v-text-field>
@@ -22,6 +23,7 @@
                 color="blue"
                 placeholder="Senha"
                 append-icon="lock"
+                :rules="[rules.required,rules.counter]"
                 required
                 solo
               ></v-text-field>
@@ -54,21 +56,44 @@ export default {
   },
   data: () => ({
     email: "",
-    password: ""
+    password: "",
+    rules: {
+      required: value => !!value || "Campo requerido.",
+      counter: value =>
+        value.length >= 6 || "A senha deve contar com 6 ou mais caracteres",
+      email: value => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "E-mail inválido.";
+      }
+    }
   }),
   computed: {},
   methods: {
     login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(data => {
-          console.log(data.user); // eslint-disable-line
-           this.$router.push("/app");
-        })
-        .catch(error => {
-          console.log(error.user); // eslint-disable-line
-        });
+      if (this.$refs.form.validate()) {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(data => {
+            console.log(data.user); // eslint-disable-line
+            this.$router.push("/app");
+          })
+          .catch(error => {
+            console.log(error); // eslint-disable-line
+            let errorMessage = "";
+            if (error.code == "auth/too-many-requests") {
+              errorMessage =
+                "Muitas tentativas de login sem sucesso, tente novamente mais tarde.";
+            }
+            if (error.code == "auth/wrong-password") {
+              errorMessage = "Senha inválida.";
+            }
+            if (error.code == "auth/user-not-found") {
+              errorMessage = "E-mail inválido.";
+            }
+            this.$store.commit("openModalErrorCadastro", errorMessage);
+          });
+      }
     }
   },
   watch: {}

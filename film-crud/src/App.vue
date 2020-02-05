@@ -8,7 +8,7 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
-      <v-btn v-if="this.$route.path != '/'" @click="logout" text>
+      <v-btn v-if="this.$route.path == '/app'" @click="logout" text>
         <v-icon class="mr-3">arrow_back</v-icon>Sair
       </v-btn>
       <v-btn v-if="this.$route.path != '/app'" to="/" text>
