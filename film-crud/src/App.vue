@@ -20,9 +20,6 @@
       <v-btn v-if="this.$route.path != '/app'" to="/login" text class="ml-3">
         <v-icon class="mr-3">exit_to_app</v-icon>Login
       </v-btn>
-      <v-btn v-if="this.$route.path != '/app'" to="/cadastro" text class="ml-3">
-        <v-icon class="mr-3">assignment</v-icon>Cadastrar-se
-      </v-btn>
     </v-app-bar>
     <v-content>
       <router-view></router-view>
@@ -39,9 +36,10 @@ export default {
     logout() {
       auth()
         .signOut()
-        .then(
-          data => console.log(data) // eslint-disable-line
-        )
+        .then(data => {
+          console.log(data); // eslint-disable-line
+          this.$store.commit("setUserID", "");
+        })
         .catch(
           error => console.log(error) // eslint-disable-line
         );

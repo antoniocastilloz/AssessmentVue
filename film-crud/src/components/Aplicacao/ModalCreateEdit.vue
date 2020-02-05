@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import * as firebase from "firebase";
+
 export default {
   name: "ModalCreateEdit",
   data: () => ({
@@ -98,6 +100,9 @@ export default {
     inputRules: [v => v.length > 0 || "Campo obrigatório"]
   }),
   computed: {
+    userID() {
+      return this.$store.state.user.id;
+    },
     modalCreateEdit() {
       return this.$store.state.modalCreateEdit;
     },
@@ -135,6 +140,18 @@ export default {
           this.editGame(newObject);
         } else {
           this.addGame(newObject);
+          firebase
+            .firestore()
+            .collection("Users")
+            .doc(this.userID)
+            .collection("games")
+            .add(newObject)
+            .then(data => {
+              console.log(data); // eslint-disable-line
+            })
+            .catch(error => {
+              console.log(error); // eslint-disable-line
+            });
         }
         this.clearInputs();
         this.closeModalCreateEdit();

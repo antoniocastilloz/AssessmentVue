@@ -4,7 +4,7 @@
       <v-col xs="11" sm="12" md="5" lg="4" class="d-flex align-center justify-center">
         <v-row class="d-flex justify-center">
           <v-col elevation="23">
-            <h1 class="display-2 font-italic font-weight-bold text-center">Cadastro</h1>
+            <h1 class="display-2 font-weight-bold text-center">Cadastro</h1>
             <br />
             <v-form ref="form">
               <v-text-field
@@ -45,7 +45,7 @@
               raised
               block
               large
-            >Registrar-se</v-btn>
+            >Cadastrar-se</v-btn>
           </v-col>
         </v-row>
       </v-col>

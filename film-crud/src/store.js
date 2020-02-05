@@ -12,7 +12,10 @@ export default new Vuex.Store({
         modalSuccess: false,
         modalError: {
             open: false,
-            message: "fds",
+            message: "",
+        },
+        user: {
+            id:"",
         },
         jogos: [
             { name: "Sonic", date: "30/1/2020", type: "Plataforma", favorite: true, full: true, image: "https://kanto.legiaodosherois.com.br/w760-h398-gnw-cfill-q80/wp-content/uploads/2020/01/legiao_Z1Rr3VKwx0Qlo2bX97iTz5GNBgedWSyFJLanOs8DUu.jpg.jpeg", description: "Sonic The Hedgedog ou apenas Sonic é o principal personagem de um dos games mais famosos da atualidade e o principal símbolo da SEGA." },
@@ -22,6 +25,10 @@ export default new Vuex.Store({
         ]
     },
     mutations: {
+        // Auth
+        setUserID(state, id){
+            state.user.id = id
+        },
         //CRUD
         addGame(state, object) {
             state.jogos.unshift(object)

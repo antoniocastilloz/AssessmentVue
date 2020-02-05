@@ -4,7 +4,7 @@
       <v-col xs="11" sm="12" md="5" lg="4" class="d-flex align-center justify-center">
         <v-row class="d-flex justify-center">
           <v-col elevation="23">
-            <h1 class="display-2 font-italic font-weight-bold text-center">Login</h1>
+            <h1 class="display-2 font-weight-bold text-center">Login</h1>
             <br />
             <v-form ref="form">
               <v-text-field
@@ -30,12 +30,21 @@
             </v-form>
             <v-btn
               elevation="10"
-              class="bgGradient white--text"
+              class="bgGradient white--text mb-7"
               @click="login"
               raised
               block
               large
             >Entrar</v-btn>
+            <v-btn
+              elevation="10"
+              color="blue white--text"
+              @click="login"
+              to="/cadastro"
+              outlined
+              block
+              large
+            >Cadastrar-se</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -75,7 +84,7 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(data => {
-            console.log(data.user); // eslint-disable-line
+            this.$store.commit("setUserID", data.user.uid);
             this.$router.push("/app");
           })
           .catch(error => {
