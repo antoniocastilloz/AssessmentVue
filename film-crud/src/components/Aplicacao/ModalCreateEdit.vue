@@ -148,6 +148,20 @@ export default {
             .add(newObject)
             .then(data => {
               console.log(data); // eslint-disable-line
+              // firebase
+              //   .firestore()
+              //   .collection("Users")
+              //   .doc(this.userID)
+              //   .collection("games")
+              //   .onSnapshot(data => {
+              //     var teste = [];
+              //     data.forEach(document => {
+              //       teste.unshift(document.data());
+              //     });
+              //     return teste;
+              //     console.log(teste); // eslint-disable-line
+              //     console.log(data); // eslint-disable-line
+              //   });
             })
             .catch(error => {
               console.log(error); // eslint-disable-line

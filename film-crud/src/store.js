@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import * as firebase from "firebase";
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,23 +17,25 @@ export default new Vuex.Store({
             message: "",
         },
         user: {
-            id:"",
+            id: "",
         },
         jogos: [
             { name: "Sonic", date: "30/1/2020", type: "Plataforma", favorite: true, full: true, image: "https://kanto.legiaodosherois.com.br/w760-h398-gnw-cfill-q80/wp-content/uploads/2020/01/legiao_Z1Rr3VKwx0Qlo2bX97iTz5GNBgedWSyFJLanOs8DUu.jpg.jpeg", description: "Sonic The Hedgedog ou apenas Sonic é o principal personagem de um dos games mais famosos da atualidade e o principal símbolo da SEGA." },
             { name: "The King Of Fighters", date: "30/1/2020", type: "Luta", favorite: false, full: true, image: "https://www.gamerview.com.br/wp-content/uploads/2019/10/The-King-of-Fighters-All-Star_bg.jpg", description: "The King of Fighters foi criado para ser um jogo que estrelasse os principais personagens da SNK independentemente de qualquer detalhe cronológico ou canônico." },
             { name: "Mario", date: "30/1/2020", type: "Plataforma", favorite: false, full: false, image: "https://img.elo7.com.br/product/original/158F8C6/painel-super-mario-bros-festa-super-mario.jpg", description: "Super Mario é o mascote mais popular da Nintendo. Com 29 anos de história, o personagem já estrelou dezenas de jogos, entre eles os da série principal, Super Mario Bros." },
             {}
-        ]
+        ],
+        gamesFirebase: []
     },
     mutations: {
         // Auth
-        setUserID(state, id){
+        setUserID(state, id) {
             state.user.id = id
         },
         //CRUD
         addGame(state, object) {
             state.jogos.unshift(object)
+            // state.gamesFirebase = firebase.firestore()
         },
         editGame(state, object) {
             state.jogos.splice(state.actualIndex, 1, object)
@@ -72,6 +76,23 @@ export default new Vuex.Store({
                 message: "",
             }
         },
+    },
+    actions: {
+        setUserData(context, id) {
+            context.commit("setUserID", id)
+            firebase
+                .firestore()
+                .collection("Users")
+                .doc(id)
+                .collection("games")
+                .onSnapshot(data => {
+                    var allData = [];
+                    data.forEach(document => {
+                        allData.unshift(document.data());
+                    });
+                    context.state.gamesFirebase = allData;
+                })
+        }
     }
 
 });

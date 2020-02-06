@@ -84,7 +84,7 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(data => {
-            this.$store.commit("setUserID", data.user.uid);
+            this.$store.dispatch("setUserData", data.user.uid);
             this.$router.push("/app");
           })
           .catch(error => {
