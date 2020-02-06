@@ -32,10 +32,6 @@ export default new Vuex.Store({
             state.user.id = id
         },
         //CRUD
-        addGame(state, object) {
-            state.jogos.unshift(object)
-            // state.gamesFirebase = firebase.firestore()
-        },
         editGame(state, object) {
             state.jogos.splice(state.actualIndex, 1, object)
         },
@@ -94,6 +90,21 @@ export default new Vuex.Store({
                     });
                     context.state.games = allData;
                 })
+        },
+        //CRUD
+        addGame(context, object) {
+            firebase
+                .firestore()
+                .collection("Users")
+                .doc(context.state.user.id)
+                .collection("games")
+                .add(object)
+                .then(data => {
+                    console.log(data); // eslint-disable-line
+                })
+                .catch(error => {
+                    console.log(error); // eslint-disable-line
+                });
         },
         deleteGame(context) {
             firebase

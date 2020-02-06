@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
 
 export default {
   name: "ModalCreateEdit",
@@ -140,32 +140,6 @@ export default {
           this.editGame(newObject);
         } else {
           this.addGame(newObject);
-          firebase
-            .firestore()
-            .collection("Users")
-            .doc(this.userID)
-            .collection("games")
-            .add(newObject)
-            .then(data => {
-              console.log(data); // eslint-disable-line
-              // firebase
-              //   .firestore()
-              //   .collection("Users")
-              //   .doc(this.userID)
-              //   .collection("games")
-              //   .onSnapshot(data => {
-              //     var teste = [];
-              //     data.forEach(document => {
-              //       teste.unshift(document.data());
-              //     });
-              //     return teste;
-              //     console.log(teste); // eslint-disable-line
-              //     console.log(data); // eslint-disable-line
-              //   });
-            })
-            .catch(error => {
-              console.log(error); // eslint-disable-line
-            });
         }
         this.clearInputs();
         this.closeModalCreateEdit();
@@ -173,7 +147,7 @@ export default {
       }
     },
     addGame(object) {
-      this.$store.commit("addGame", object);
+      this.$store.dispatch("addGame", object);
     },
     editGame(object) {
       this.$store.commit("editGame", object);
