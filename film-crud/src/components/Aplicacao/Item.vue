@@ -11,6 +11,7 @@
       class="d-flex align-center"
     >
       <v-card
+        :id="game.id"
         v-if="index != game.length -1"
         max-width="100%"
         class="mx-auto elevation-10"

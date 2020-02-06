@@ -87,7 +87,13 @@ export default new Vuex.Store({
                 .onSnapshot(data => {
                     var allData = [];
                     data.forEach(document => {
-                        allData.unshift(document.data());
+                        let object = {}
+                        for(let  [property, valor] of Object.entries(document.data())){
+                            object[property] = valor
+                        }
+                        object["id"] = document.id
+                        console.log(object) // eslint-disable-line
+                        allData.unshift(object);
                     });
                     context.state.games = allData;
                 })
