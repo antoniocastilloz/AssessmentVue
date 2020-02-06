@@ -28,13 +28,14 @@
 </template>
 
 <script>
-import { auth } from "firebase";
+import * as firebase from "firebase";
 
 export default {
   name: "App",
   methods: {
     logout() {
-      auth()
+      firebase
+        .auth()
         .signOut()
         .then(data => {
           console.log(data); // eslint-disable-line
@@ -43,13 +44,21 @@ export default {
         .catch(
           error => console.log(error) // eslint-disable-line
         );
-      this.$router.push("/");
     }
   },
   created() {
     if (this.$route.path == "/Vue-GameCatalog/") {
       this.$router.push("/");
     }
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(user); // eslint-disable-line
+        this.$store.dispatch("setUserData", user.uid);
+      } else {
+        this.$store.commit("setUserID", "");
+        this.$router.push("/login");
+      }
+    });
   }
 };
 </script>
