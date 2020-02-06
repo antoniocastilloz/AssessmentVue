@@ -32,9 +32,6 @@ export default new Vuex.Store({
             state.user.id = id
         },
         //CRUD
-        editGame(state, object) {
-            state.jogos.splice(state.actualIndex, 1, object)
-        },
         setActualIndex(state, index) {
             state.actualIndex = index
         },
@@ -99,6 +96,21 @@ export default new Vuex.Store({
                 .doc(context.state.user.id)
                 .collection("games")
                 .add(object)
+                .then(data => {
+                    console.log(data); // eslint-disable-line
+                })
+                .catch(error => {
+                    console.log(error); // eslint-disable-line
+                });
+        },
+        editGame(context, object) {
+            firebase
+                .firestore()
+                .collection("Users")
+                .doc(context.state.user.id)
+                .collection("games")
+                .doc(context.state.actualIndex)
+                .update(object)
                 .then(data => {
                     console.log(data); // eslint-disable-line
                 })

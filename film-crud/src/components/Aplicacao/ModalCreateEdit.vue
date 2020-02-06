@@ -143,14 +143,14 @@ export default {
         }
         this.clearInputs();
         this.closeModalCreateEdit();
-        console.log(this.jogos.slice()[this.actualIndex]); // eslint-disable-line
+        console.log(this.games.slice()[this.actualIndex]); // eslint-disable-line
       }
     },
     addGame(object) {
       this.$store.dispatch("addGame", object);
     },
     editGame(object) {
-      this.$store.commit("editGame", object);
+      this.$store.dispatch("editGame", object);
     },
     closeModalCreateEdit() {
       this.$store.commit("closeModalCreateEdit");
@@ -167,17 +167,27 @@ export default {
   watch: {
     modalCreateEdit: function() {
       if (this.modalCreateEdit && this.isEdit) {
-        this.actualGame.name = this.jogos.slice()[this.actualIndex].name;
-        this.actualGame.data = this.jogos.slice()[this.actualIndex].data;
-        this.actualGame.type = this.jogos.slice()[this.actualIndex].type;
-        this.actualGame.favorite = this.jogos.slice()[
-          this.actualIndex
-        ].favorite;
-        this.actualGame.full = this.jogos.slice()[this.actualIndex].full;
-        this.actualGame.image = this.jogos.slice()[this.actualIndex].image;
-        this.actualGame.description = this.jogos.slice()[
-          this.actualIndex
-        ].description;
+        this.actualGame.name = this.games.find(
+          object => object.id === this.actualIndex
+        ).name;
+        this.actualGame.data = this.games.find(
+          object => object.id === this.actualIndex
+        ).data;
+        this.actualGame.type = this.games.find(
+          object => object.id === this.actualIndex
+        ).type;
+        this.actualGame.favorite = this.games.find(
+          object => object.id === this.actualIndex
+        ).favorite;
+        this.actualGame.full = this.games.find(
+          object => object.id === this.actualIndex
+        ).full;
+        this.actualGame.image = this.games.find(
+          object => object.id === this.actualIndex
+        ).image;
+        this.actualGame.description = this.games.find(
+          object => object.id === this.actualIndex
+        ).description;
       } else {
         this.clearInputs();
       }
