@@ -39,9 +39,6 @@ export default new Vuex.Store({
         editGame(state, object) {
             state.jogos.splice(state.actualIndex, 1, object)
         },
-        deleteGame(state) {
-            state.jogos.splice(state.actualIndex, 1)
-        },
         setActualIndex(state, index) {
             state.actualIndex = index
         },
@@ -88,7 +85,7 @@ export default new Vuex.Store({
                     var allData = [];
                     data.forEach(document => {
                         let object = {}
-                        for(let  [property, valor] of Object.entries(document.data())){
+                        for (let [property, valor] of Object.entries(document.data())) {
                             object[property] = valor
                         }
                         object["id"] = document.id
@@ -97,7 +94,16 @@ export default new Vuex.Store({
                     });
                     context.state.games = allData;
                 })
-        }
-    }
+        },
+        deleteGame(context) {
+            firebase
+                .firestore()
+                .collection("Users")
+                .doc(context.state.user.id)
+                .collection("games")
+                .doc(context.state.actualIndex)
+                .delete()
+        },
+    },
 
 });

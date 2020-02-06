@@ -11,8 +11,6 @@
       class="d-flex align-center"
     >
       <v-card
-        :id="game.id"
-        v-if="index != game.length -1"
         max-width="100%"
         class="mx-auto elevation-10"
         style="width:100%; height:100%;"
@@ -35,10 +33,10 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn icon @click="openModalCreateEdit(index)">
+          <v-btn icon @click="openModalCreateEdit(game.id)">
             <v-icon color="primary">create</v-icon>
           </v-btn>
-          <v-btn icon @click="openModalDelete(index)">
+          <v-btn icon @click="openModalDelete(game.id)">
             <v-icon color="primary">delete</v-icon>
           </v-btn>
         </v-card-actions>
@@ -56,14 +54,12 @@ export default {
     }
   },
   methods: {
-    openModalCreateEdit(index) {
-      if (index > -1) {
-        this.$store.commit("setActualIndex", index);
-      }
+    openModalCreateEdit(id) {
+      this.$store.commit("setActualIndex", id);
       this.$store.commit("openModalCreateEdit", true);
     },
-    openModalDelete(index) {
-      this.$store.commit("setActualIndex", index);
+    openModalDelete(id) {
+      this.$store.commit("setActualIndex", id);
       this.$store.commit("openModalDelete");
     }
   }

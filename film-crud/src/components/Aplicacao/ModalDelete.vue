@@ -4,7 +4,7 @@
       <v-card-title class="headline bgGradient white--text">Excluir</v-card-title>
       <v-card-text
         class="pb-4 pt-4 white--text"
-      >Tem certeza que deseja excluir "{{jogos[actualIndex].name}}" da sua lista de jogos ?</v-card-text>
+      >Tem certeza que deseja excluir "{{games.find(object => object.id === actualIndex).name}}" da sua lista de jogos ?</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click="deleteGame">Sim</v-btn>
@@ -24,14 +24,14 @@ export default {
     actualIndex() {
       return this.$store.state.actualIndex;
     },
-    jogos() {
-      return this.$store.state.jogos;
+    games() {
+      return this.$store.state.games;
     }
   },
   methods: {
     deleteGame() {
       this.closeModalDelete();
-      this.$store.commit("deleteGame");
+      this.$store.dispatch("deleteGame");
     },
     closeModalDelete() {
       this.$store.commit("closeModalDelete");
