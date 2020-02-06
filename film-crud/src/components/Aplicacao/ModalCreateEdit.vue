@@ -109,8 +109,8 @@ export default {
     isEdit() {
       return this.$store.state.isEdit;
     },
-    jogos() {
-      return this.$store.state.jogos;
+    games() {
+      return this.$store.state.games;
     },
     actualIndex() {
       return this.$store.state.actualIndex;

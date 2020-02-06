@@ -1,7 +1,7 @@
 <template>
   <v-row class="mx-3">
     <v-col
-      v-for="(jogo,index) in jogos"
+      v-for="(game,index) in games"
       v-bind:key="index"
       xs="6"
       sm="6"
@@ -11,26 +11,26 @@
       class="d-flex align-center"
     >
       <v-card
-        v-if="index != jogos.length -1"
+        v-if="index != game.length -1"
         max-width="100%"
         class="mx-auto elevation-10"
         style="width:100%; height:100%;"
       >
         <v-list-item class="bgGradient">
           <v-list-item-content>
-            <v-list-item-title class="headline white--text">{{jogo.name}}</v-list-item-title>
-            <v-list-item-subtitle class="mb-2 white--text">{{jogo.date}}</v-list-item-subtitle>
-            <v-list-item-subtitle class="mb-2 white--text">{{jogo.type}}</v-list-item-subtitle>
+            <v-list-item-title class="headline white--text">{{game.name}}</v-list-item-title>
+            <v-list-item-subtitle class="mb-2 white--text">{{game.date}}</v-list-item-subtitle>
+            <v-list-item-subtitle class="mb-2 white--text">{{game.type}}</v-list-item-subtitle>
             <div style="min-height:24px;">
-              <v-icon color="white" v-if="jogo.favorite">mdi-heart</v-icon>
-              <v-icon color="white" v-if="jogo.full">hourglass_full</v-icon>
+              <v-icon color="white" v-if="game.favorite">mdi-heart</v-icon>
+              <v-icon color="white" v-if="game.full">hourglass_full</v-icon>
             </div>
           </v-list-item-content>
         </v-list-item>
 
-        <v-img :src="jogo.image" min-height="194"></v-img>
+        <v-img :src="game.image" min-height="194"></v-img>
 
-        <v-card-text>{{jogo.description}}</v-card-text>
+        <v-card-text>{{game.description}}</v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -50,8 +50,8 @@
 export default {
   name: "Item",
   computed: {
-    jogos() {
-      return this.$store.state.jogos;
+    games() {
+      return this.$store.state.games;
     }
   },
   methods: {
