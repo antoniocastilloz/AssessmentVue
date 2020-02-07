@@ -59,7 +59,7 @@ export default {
         }
       } else {
         this.$store.commit("setUserID", "");
-        this.$router.push("/login").catch(() => {});
+        this.$router.push("/").catch(() => {});
       }
     });
   }
