@@ -2,7 +2,7 @@
   <v-dialog v-model="modalDelete" persistent max-width="300">
     <v-card class="blue-grey darken-4">
       <v-card-title class="headline bgGradient white--text">Excluir</v-card-title>
-      <v-card-text
+      <v-card-text v-if="actualIndex != 0"
         class="pb-4 pt-4 white--text"
       >Tem certeza que deseja excluir "{{games.find(object => object.id === actualIndex).name}}" da sua lista de jogos ?</v-card-text>
       <v-card-actions>

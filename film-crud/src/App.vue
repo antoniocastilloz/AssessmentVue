@@ -54,9 +54,12 @@ export default {
       if (user) {
         console.log(user); // eslint-disable-line
         this.$store.dispatch("setUserData", user.uid);
+        if(this.$router != "/app"){
+          this.$router.push("/app").catch(() => {});
+        }
       } else {
         this.$store.commit("setUserID", "");
-        this.$router.push("/login");
+        this.$router.push("/login").catch(() => {});
       }
     });
   }

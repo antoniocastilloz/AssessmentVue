@@ -47,7 +47,7 @@ export default {
   },
   watch: {
     jogos: function() {
-      if (this.jogos.length == 6) {
+      if (this.jogos.length == 5) {
         this.snackbar = true;
       }
     }

@@ -83,8 +83,8 @@ export default {
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
-          .then(data => {
-            this.$router.push("/app");
+          .then(() => {
+            this.$router.push("/app").catch(() =>{});
           })
           .catch(error => {
             console.log(error); // eslint-disable-line
@@ -104,6 +104,5 @@ export default {
       }
     }
   },
-  watch: {}
 };
 </script>
